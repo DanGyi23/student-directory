@@ -1,5 +1,3 @@
-puts "The students of Villains Academy\n-------------"
-
 # places all the students in an array
 students = [
   "Dr. Hannibal Lecter",
