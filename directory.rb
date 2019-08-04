@@ -1,10 +1,15 @@
 def print_header
-  puts "The students of Villains Academy\n-------------"
+  puts "The students of Villains Academy Whose Names Begin with 'A'\n-------------"
 end
 
-# prints numbered list of students added to the students array via input_students method
-def print(students)
-  students.each.with_index(1) { |student,index| puts "#{index}. #{student[:name]} (#{student[:cohort]} cohort)" }
+def print_only_a(students)
+  students.each.with_index(1) do |student,index|
+    if student[:name][0].downcase == "a"
+      puts "#{index}. #{student[:name]} (#{student[:cohort]} cohort)"
+    else
+      next
+    end
+  end
 end
 
 def print_footer(names)
@@ -31,5 +36,5 @@ end
 
 students = input_students
 print_header
-print(students)
+print_only_a(students)
 print_footer(students)
