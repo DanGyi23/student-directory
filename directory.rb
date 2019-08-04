@@ -1,10 +1,10 @@
 def print_header
-  puts "The students of Villains Academy Whose Names Begin with 'A'\n-------------"
+  puts "The students of Villains Academy whose names are shorter than 12 characters\n-------------"
 end
 
 def print_only_a(students)
   students.each.with_index(1) do |student,index|
-    if student[:name][0].downcase == "a"
+    if student[:name].length <= 12
       puts "#{index}. #{student[:name]} (#{student[:cohort]} cohort)"
     else
       next
