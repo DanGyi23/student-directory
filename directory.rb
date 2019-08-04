@@ -1,14 +1,12 @@
 def print_header
-  puts "The students of Villains Academy whose names are shorter than 12 characters\n-------------"
+  puts "The students of Villains Academy\n-------------"
 end
 
-def print_only_a(students)
-  students.each.with_index(1) do |student,index|
-    if student[:name].length <= 12
-      puts "#{index}. #{student[:name]} (#{student[:cohort]} cohort)"
-    else
-      next
-    end
+def print(students)
+  index = 0
+  while true do
+    puts "#{students[index][:name]} (#{students[index][:cohort]} cohort)"
+    index += 1
   end
 end
 
@@ -36,5 +34,5 @@ end
 
 students = input_students
 print_header
-print_only_a(students)
+print(students)
 print_footer(students)
