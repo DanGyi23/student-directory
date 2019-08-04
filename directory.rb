@@ -3,10 +3,8 @@ def print_header
 end
 
 def print(students)
-  index = 0
-  while true do
-    puts "#{students[index][:name]} (#{students[index][:cohort]} cohort)"
-    index += 1
+  students.each.with_index(1) do |student,index|
+    puts "#{index}. #{student[:name]} (#{student[:cohort]} cohort) // DOB #{student[:dob]} // Hobbies: #{student[:hobbies]}"
   end
 end
 
@@ -14,21 +12,31 @@ def print_footer(names)
   puts "Overall, we have #{names.count} great students"
 end
 
-# name injector - asks user for names of students, adds them to the array, then
-# puts a running count.
+# added in hobbies and dob inputs
 def input_students
-  puts "Please enter the names of the students"
-  puts "To finish, just hit return twice"
-
   students = []
+  puts "Please enter the names of the students"
+  puts "To finish, just hit return three times"
+
   name = gets.chomp
+  puts "Please enter this student's hobbies"
+  hobbies = gets.chomp
+  puts "Please enter this student's date of birth (dd/mm/yyyy)"
+  dob = gets.chomp
 
   while !name.empty? do
-    students << {name: name, cohort: :November}
-    puts "Now we have #{students.count} students"
+    students << {name: name, cohort: :November, hobbies: hobbies, dob: dob}
+    if students.size == 1
+      puts "Now we have #{students.count} student"
+    else
+      puts "Now we have #{students.count} students"
+    end
     name = gets.chomp
+    puts "Please enter this student's hobbies"
+    hobbies = gets.chomp
+    puts "Please enter this student's date of birth (dd/mm/yyyy)"
+    dob = gets.chomp
   end
-  # returns complete array with all added names
   students
 end
 
