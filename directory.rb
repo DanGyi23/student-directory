@@ -28,5 +28,5 @@ end
 
 # call the methods with students as param for print_students and print_footer
 print_header
-print_students(students)
+print(students)
 print_footer(students)
