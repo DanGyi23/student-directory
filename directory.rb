@@ -2,8 +2,9 @@ def print_header
   puts "The students of Villains Academy\n-------------"
 end
 
+# prints numbered list of students added to the students array via input_students method
 def print(students)
-  students.each { |student| puts "#{student[:name]} (#{student[:cohort]} cohort)" }
+  students.each.with_index(1) { |student,index| puts "#{index}. #{student[:name]} (#{student[:cohort]} cohort)" }
 end
 
 def print_footer(names)
@@ -24,7 +25,7 @@ def input_students
     puts "Now we have #{students.count} students"
     name = gets.chomp
   end
-  #returns complete array with all added names
+  # returns complete array with all added names
   students
 end
 
