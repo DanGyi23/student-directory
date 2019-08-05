@@ -3,44 +3,54 @@ def print_header
 end
 
 def print(students)
-  students.each.with_index(1) do |student,index|
-    puts "#{index}. #{student[:name]} (#{student[:cohort]} cohort) // DOB #{student[:dob]} // Hobbies: #{student[:hobbies]}"
-  end
+  students.each { |student| puts "#{student[:name]} (#{student[:cohort]} cohort)" }
 end
 
 def print_footer(names)
   puts "Overall, we have #{names.count} great students"
 end
 
-# added in hobbies and dob inputs
+# name injector - asks user for names of students, adds them to the array, then
+# puts a running count.
 def input_students
-  students = []
   puts "Please enter the names of the students"
-  puts "To finish, just hit return three times"
+  puts "To finish, just hit return twice"
 
+  students = []
   name = gets.chomp
-  puts "Please enter this student's hobbies"
-  hobbies = gets.chomp
-  puts "Please enter this student's date of birth (dd/mm/yyyy)"
-  dob = gets.chomp
 
   while !name.empty? do
-    students << {name: name, cohort: :November, hobbies: hobbies, dob: dob}
-    if students.size == 1
-      puts "Now we have #{students.count} student"
-    else
-      puts "Now we have #{students.count} students"
-    end
+    students << {name: name, cohort: :November}
+    puts "Now we have #{students.count} students"
     name = gets.chomp
-    puts "Please enter this student's hobbies"
-    hobbies = gets.chomp
-    puts "Please enter this student's date of birth (dd/mm/yyyy)"
-    dob = gets.chomp
   end
+  #returns complete array with all added names
   students
 end
 
-students = input_students
-print_header
-print(students)
-print_footer(students)
+def interactive_menu
+  students = []
+  loop do
+    puts "1. Input the students"
+    puts "2. Show the students"
+    puts "9. Exit"
+
+    selection = gets.chomp
+
+    case selection
+    when "1"
+      students = input_students
+    when "2"
+      print_header
+      print(students)
+      print_footer(students)
+    when "9"
+      exit
+    else
+      puts "I don't know what you mean, try again"
+    end
+
+  end
+end
+
+interactive_menu
