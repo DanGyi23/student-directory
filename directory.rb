@@ -30,9 +30,11 @@ def input_students
   hobbies = gets.chomp
   puts "Please enter this student's date of birth (dd/mm/yyyy)"
   dob = gets.chomp
+  puts "Please enter which cohort you're part of"
+  cohort = gets.chomp
 
   while !name.empty? do
-    students << {name: name, cohort: :November, hobbies: hobbies, dob: dob}
+    students << {name: name, cohort: cohort, hobbies: hobbies, dob: dob}
     @max_size << (name + hobbies + dob)
     if students.size == 1
       puts "Now we have #{students.count} student"
@@ -44,6 +46,8 @@ def input_students
     hobbies = gets.chomp
     puts "Please enter this student's date of birth (dd/mm/yyyy)"
     dob = gets.chomp
+    puts "Please enter which cohort you're part of"
+    cohort = gets.chomp
   end
   @max_size
   students
