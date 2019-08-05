@@ -24,9 +24,9 @@ end
     puts "Please enter the names of the students"
     puts "To finish, just hit return three times"
 
-    name = gets.chomp
+    name = gets.strip
     puts "Please enter which month this student started"
-    cohort = gets.chomp
+    cohort = gets.strip
 
     while !name.empty? do
       @students << {name: name, cohort: cohort}
@@ -36,9 +36,9 @@ end
       else
         puts "Now we have #{@students.count} students"
       end
-      name = gets.chomp
+      name = gets.strip
       puts "Please enter which month this student started"
-      cohort = gets.chomp
+      cohort = gets.strip
     end
     @max_size
     @students
