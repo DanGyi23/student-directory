@@ -13,18 +13,15 @@ def print_footer(names)
   puts "Overall, we have #{names.count} great students"
 end
 
-# name injector - asks user for names of students, adds them to the array, then
-# puts a running count.
 def input_students
   puts "Please enter the names of the students"
   puts "To finish, just hit return twice"
-
-  name = gets.chomp
+  name = STDIN.gets.chomp
 
   while !name.empty? do
     @students << {name: name, cohort: :November}
     puts "Now we have #{@students.count} students"
-    name = gets.chomp
+    name = STDIN.gets.chomp
   end
   @students
 end
@@ -62,6 +59,7 @@ end
 
 def save_students
   file = File.open("students.csv", "w")
+
   @students.each do |student|
     student_data = [student[:name], student[:cohort]]
     csv_line = student_data.join(",")
@@ -70,8 +68,9 @@ def save_students
   file.close
 end
 
-def load_students
-  file = File.open("students.csv", "r")
+def load_students(filename = "students.csv")
+  file = File.open(filename, "r")
+
   file.readlines.each do |line|
     name, cohort = line.chomp.split(",")
     @students << {name: name, cohort: cohort.to_sym}
@@ -79,12 +78,24 @@ def load_students
   file.close
 end
 
-def interactive_menu
-  loop do
-    print_menu
-    # pass process as a method with user input as argument.
-    process(gets.chomp)
+def try_load_students
+  filename = ARGV.first
+  return if filename.nil?
+  if File.exists?(filename)
+    load_students(filename)
+    puts "Loaded #{@students.count} from #{filename}"
+  else
+    puts "Sorry, #{filename} doesn't exist"
+    exit
   end
 end
 
+def interactive_menu
+  loop do
+    print_menu
+    process(STDIN.gets.chomp)
+  end
+end
+
+try_load_students
 interactive_menu
