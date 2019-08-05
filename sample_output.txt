@@ -1,0 +1,34 @@
+Dans-MBP:student-directory dangyi$ ruby directory.rb
+Please enter the names of the students
+To finish, just hit return three times
+Rob
+Please enter which month this student started
+January
+Now we have 1 student
+Tim
+Please enter which month this student started
+February
+Now we have 2 students
+John
+Please enter which month this student started
+December
+Now we have 3 students
+Anthony
+Please enter which month this student started
+February
+Now we have 4 students
+Janine
+Please enter which month this student started
+December
+Now we have 5 students
+
+Please enter which month this student started
+
+        The students of Villains Academy
+                 -------------
+            1. Rob (January cohort)
+            2. Tim (February cohort)
+          3. Anthony (February cohort)
+           4. John (December cohort)
+          5. Janine (December cohort)
+       Overall, we have 5 great students
