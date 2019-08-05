@@ -22,7 +22,7 @@ end
 
   def input_students
     puts "Please enter the names of the students"
-    puts "To finish, just hit return three times"
+    puts "To finish, just hit return twice"
 
     name = gets.strip
     puts "Please enter which month this student started"
@@ -52,8 +52,14 @@ def group_by_cohort(students)
   @students.sort! { |a,b| b[:cohort] <=> a[:cohort] }
 end
 
+
+
 students = input_students
-group_by_cohort(students)
-print_header
-print(students)
-print_footer(students)
+if students.count == 0
+  puts "You didn't enter any students!"
+else
+  group_by_cohort(students)
+  print_header
+  print(students)
+  print_footer(students)
+end
