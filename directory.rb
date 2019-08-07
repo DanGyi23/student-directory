@@ -29,8 +29,8 @@ end
 def print_menu
   puts "1. Input the students"
   puts "2. Show the students"
-  puts "3. Save the students to students.csv"
-  puts "4. Load the students from students.csv"
+  puts "3. Save the students to file"
+  puts "4. Load the students from file"
   puts "9. Exit"
 end
 
@@ -57,25 +57,41 @@ def process(selection)
   end
 end
 
+# updated to ask for filename to write to
 def save_students
-  file = File.open("students.csv", "w")
+  puts "Enter the name of the file you'd like to save to"
+  input_filename = gets.chomp
+  if File.exists?(input_filename)
+    file = File.open(input_filename, "w")
 
-  @students.each do |student|
-    student_data = [student[:name], student[:cohort]]
-    csv_line = student_data.join(",")
-    file.puts csv_line
+    @students.each do |student|
+      student_data = [student[:name], student[:cohort]]
+      csv_line = student_data.join(",")
+      file.puts csv_line
+    end
+    file.close
+    puts "Students saved to #{input_filename}"
+  else
+    puts "Sorry, #{input_filename} doesn't exist"
   end
-  file.close
 end
 
+# updated to ask for filename to load from
 def load_students(filename = "students.csv")
-  file = File.open(filename, "r")
+  puts "Enter the name of the file you'd like to load from"
+  filename = gets.chomp
+  if File.exists?(filename)
+    file = File.open(filename, "r")
 
-  file.readlines.each do |line|
-    name, cohort = line.chomp.split(",")
-    student_loader(name,:November)
+    file.readlines.each do |line|
+      name, cohort = line.chomp.split(",")
+      student_loader(name,:November)
+    end
+    puts "Load Successful"
+    file.close
+  else
+    puts "Sorry, #{filename} doesn't exist"
   end
-  file.close
 end
 
 def student_loader(name,cohort= :November)
@@ -86,14 +102,12 @@ end
 def try_load_students
   filename = ARGV.first
   if filename.nil?
-    load_students('students.csv')
-    puts "Loaded #{@students.count} from students.csv"
+    load_students
   elsif File.exists?(filename)
     load_students(filename)
     puts "Loaded #{@students.count} from #{filename}"
   else
     puts "Sorry, #{filename} doesn't exist"
-    exit
   end
 end
 
