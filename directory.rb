@@ -78,16 +78,17 @@ def load_students(filename = "students.csv")
   file.close
 end
 
-# new loader method that takes 2 arguments, with the default as November.
-# Replaces lines 22 and 76.
 def student_loader(name,cohort= :November)
   @students << {name: name, cohort: cohort.to_sym}
 end
 
+# updated to auto-load students.csv
 def try_load_students
   filename = ARGV.first
-  return if filename.nil?
-  if File.exists?(filename)
+  if filename.nil?
+    load_students('students.csv')
+    puts "Loaded #{@students.count} from students.csv"
+  elsif File.exists?(filename)
     load_students(filename)
     puts "Loaded #{@students.count} from #{filename}"
   else
