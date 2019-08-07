@@ -69,7 +69,6 @@ def save_students
       csv_line = student_data.join(",")
       file.puts csv_line
     end
-    file.close
     puts "Students saved to #{input_filename}"
   else
     puts "Sorry, #{input_filename} doesn't exist"
@@ -88,7 +87,6 @@ def load_students(filename = "students.csv")
       student_loader(name,:November)
     end
     puts "Load Successful"
-    file.close
   else
     puts "Sorry, #{filename} doesn't exist"
   end
