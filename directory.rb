@@ -19,7 +19,7 @@ def input_students
   name = STDIN.gets.chomp
 
   while !name.empty? do
-    @students << {name: name, cohort: :November}
+    student_loader(name, :November)
     puts "Now we have #{@students.count} students"
     name = STDIN.gets.chomp
   end
@@ -73,9 +73,15 @@ def load_students(filename = "students.csv")
 
   file.readlines.each do |line|
     name, cohort = line.chomp.split(",")
-    @students << {name: name, cohort: cohort.to_sym}
+    student_loader(name,:November)
   end
   file.close
+end
+
+# new loader method that takes 2 arguments, with the default as November.
+# Replaces lines 22 and 76.
+def student_loader(name,cohort= :November)
+  @students << {name: name, cohort: cohort.to_sym}
 end
 
 def try_load_students
